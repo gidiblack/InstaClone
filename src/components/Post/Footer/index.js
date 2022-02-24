@@ -1,9 +1,20 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import Icon from 'react-native-vector-icons/AntDesign';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import FaIcon from 'react-native-vector-icons/FontAwesome';
 
 const Footer = ({ likesCount, caption, postedAt }) => {
   return (
     <View style={styles.container}>
+      <View style={styles.iconsContainer}>
+        <View style={styles.leftIcons}>
+          <Icon name="hearto" size={24} />
+          <IonIcon name="chatbubble-outline" size={24} style={styles.comment} />
+          <IonIcon name="paper-plane-outline" size={24} />
+        </View>
+        <FaIcon name="bookmark-o" size={24} />
+      </View>
       <Text style={styles.likes}>{likesCount} Likes</Text>
       <Text style={styles.caption}>{caption}</Text>
       <Text style={styles.postedAt}>{postedAt}</Text>
@@ -29,5 +40,20 @@ const styles = StyleSheet.create({
   postedAt: {
     fontSize: 10,
     marginTop: 5,
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 5,
+  },
+  leftIcons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: 112,
+    justifyContent: 'space-between',
+  },
+  comment: {
+    transform: [{ rotate: '-90deg' }],
   },
 });
