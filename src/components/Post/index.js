@@ -22,11 +22,9 @@ const Post = ({ post }) => {
       <Header imageUri={image} name={title} />
       <DoubleClick
         singleTap={() => {
-          console.log('single tap');
           navigation.navigate('Item', { post });
         }}
         doubleTap={() => {
-          console.log('double tap');
           onLikePressed();
         }}
         delay={200}>
