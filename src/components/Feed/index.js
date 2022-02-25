@@ -1,79 +1,32 @@
-import { FlatList } from 'react-native';
+import { FlatList, ActivityIndicator } from 'react-native';
 import React from 'react';
 import Post from '../Post';
 import Stories from '../StoriesComponent';
+import useFeed from '../../hooks/useFeed';
 
-const data = [
-  {
-    id: '1',
-    user: {
-      imageUri: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
-      name: 'John Doe',
-    },
-    imageUri: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
-    caption: 'this is a simple caption',
-    likesCount: '123',
-    postedAt: '2 hours ago',
-  },
-  {
-    id: '2',
-    user: {
-      imageUri:
-        'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg',
-      name: 'Jane Doe',
-    },
-    imageUri:
-      'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg',
-    caption: 'this is a simple caption',
-    likesCount: '123',
-    postedAt: '2 hours ago',
-  },
-  {
-    id: '3',
-    user: {
-      imageUri: 'https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg',
-      name: 'Patrick Doe',
-    },
-    imageUri: 'https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg',
-    caption: 'this is a simple caption',
-    likesCount: '123',
-    postedAt: '2 hours ago',
-  },
-  {
-    id: '4',
-    user: {
-      imageUri: 'https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg',
-      name: 'Patricia Doe',
-    },
-    imageUri: 'https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg',
-    caption: 'this is a simple caption',
-    likesCount: '123',
-    postedAt: '2 hours ago',
-  },
-  {
-    id: '5',
-    user: {
-      imageUri: 'https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg',
-      name: 'Helen Doe',
-    },
-    imageUri: 'https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg',
-    caption: 'this is a simple caption',
-    likesCount: '123',
-    postedAt: '2 hours ago',
-  },
-];
+const Feed = () => {
+  const { feedPosts, isLoading } = useFeed();
+  const feed = [];
+  if (!isLoading && feedPosts) {
+    feed.push(...feedPosts);
+  }
 
-const index = () => {
   return (
-    <FlatList
-      data={data}
-      renderItem={({ item }) => <Post post={item} />}
-      keyExtractor={({ id }) => id}
-      ListHeaderComponent={Stories}
-      showsVerticalScrollIndicator={false}
-      maxToRenderPerBatch={100}
-    />
+    <>
+      {isLoading ? (
+        <ActivityIndicator size={'large'} color="#000" />
+      ) : (
+        <FlatList
+          data={feed}
+          renderItem={({ item }) => <Post post={item} />}
+          keyExtractor={({ id }) => id}
+          ListHeaderComponent={Stories}
+          showsVerticalScrollIndicator={false}
+          maxToRenderPerBatch={100}
+        />
+      )}
+    </>
   );
 };
 
-export default index;
+export default Feed;
