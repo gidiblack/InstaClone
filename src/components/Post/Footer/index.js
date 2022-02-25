@@ -1,18 +1,10 @@
 import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 
-const Footer = ({ likesCount, caption, postedAt }) => {
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setlikeCount] = useState(likesCount);
-  const onLikePressed = () => {
-    const change = liked ? -1 : 1;
-    setlikeCount(likeCount * 1 + change);
-    setLiked(!liked);
-  };
-
+const Footer = ({ likesCount, caption, postedAt, liked, onLikePressed }) => {
   return (
     <View style={styles.container}>
       <View style={styles.iconsContainer}>
@@ -29,7 +21,7 @@ const Footer = ({ likesCount, caption, postedAt }) => {
         </View>
         <FaIcon name="bookmark-o" size={24} />
       </View>
-      <Text style={styles.likes}>{likeCount} Likes</Text>
+      <Text style={styles.likes}>{likesCount} Likes</Text>
       <Text style={styles.caption}>{caption}</Text>
       <Text style={styles.postedAt}>{postedAt}</Text>
     </View>

@@ -89,7 +89,7 @@ const Navigation = () => {
           headerShown: false,
         })}>
         <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Explore" component={ItemScreen} />
+        <Tab.Screen name="Explore" component={DefaultScreen} />
         <Tab.Screen name="Reels" component={DefaultScreen} />
         <Tab.Screen name="Likes" component={LikesScreen} />
         <Tab.Screen name="Profile" component={DefaultScreen} />

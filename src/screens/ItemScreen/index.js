@@ -1,11 +1,13 @@
-import { View, Text } from 'react-native';
 import React from 'react';
+import Post from '../../components/Post';
 
-const ItemScreen = () => {
+const ItemScreen = ({ route }) => {
+  const post = route?.params?.post;
+
   return (
-    <View>
-      <Text>ItemScreen</Text>
-    </View>
+    <>
+      <Post post={post} />
+    </>
   );
 };
 
