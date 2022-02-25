@@ -5,6 +5,7 @@ import Stories from '../StoriesComponent';
 
 const data = [
   {
+    id: '1',
     user: {
       imageUri: 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
       name: 'John Doe',
@@ -15,6 +16,7 @@ const data = [
     postedAt: '2 hours ago',
   },
   {
+    id: '2',
     user: {
       imageUri:
         'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg',
@@ -27,6 +29,7 @@ const data = [
     postedAt: '2 hours ago',
   },
   {
+    id: '3',
     user: {
       imageUri: 'https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg',
       name: 'Patrick Doe',
@@ -37,6 +40,7 @@ const data = [
     postedAt: '2 hours ago',
   },
   {
+    id: '4',
     user: {
       imageUri: 'https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg',
       name: 'Patricia Doe',
@@ -47,6 +51,7 @@ const data = [
     postedAt: '2 hours ago',
   },
   {
+    id: '5',
     user: {
       imageUri: 'https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg',
       name: 'Helen Doe',
@@ -63,12 +68,12 @@ const index = () => {
     <FlatList
       data={data}
       renderItem={({ item }) => <Post post={item} />}
+      keyExtractor={({ id }) => id}
       ListHeaderComponent={Stories}
       showsVerticalScrollIndicator={false}
+      maxToRenderPerBatch={100}
     />
   );
 };
 
 export default index;
-
-// const styles = StyleSheet.create({});

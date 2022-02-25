@@ -1,12 +1,12 @@
-import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import React from 'react';
 import Feed from '../../components/Feed';
 
 const HomeScreen = () => {
   return (
-    <View>
+    <SafeAreaView>
       <Feed />
-    </View>
+    </SafeAreaView>
   );
 };
 

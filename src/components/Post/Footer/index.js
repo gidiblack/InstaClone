@@ -1,21 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import FaIcon from 'react-native-vector-icons/FontAwesome';
 
 const Footer = ({ likesCount, caption, postedAt }) => {
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setlikeCount] = useState(likesCount);
+  const onLikePressed = () => {
+    const change = liked ? -1 : 1;
+    setlikeCount(likeCount * 1 + change);
+    setLiked(!liked);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.iconsContainer}>
         <View style={styles.leftIcons}>
-          <Icon name="hearto" size={24} />
+          <TouchableWithoutFeedback onPress={onLikePressed}>
+            <Icon
+              name={liked ? 'heart' : 'hearto'}
+              size={24}
+              color={liked ? '#c30000' : '#000000'}
+            />
+          </TouchableWithoutFeedback>
           <IonIcon name="chatbubble-outline" size={24} style={styles.comment} />
           <IonIcon name="paper-plane-outline" size={24} />
         </View>
         <FaIcon name="bookmark-o" size={24} />
       </View>
-      <Text style={styles.likes}>{likesCount} Likes</Text>
+      <Text style={styles.likes}>{likeCount} Likes</Text>
       <Text style={styles.caption}>{caption}</Text>
       <Text style={styles.postedAt}>{postedAt}</Text>
     </View>
