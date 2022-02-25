@@ -1,4 +1,4 @@
-import { StyleSheet, Image } from 'react-native';
+import { StyleSheet, Image, useColorScheme } from 'react-native';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -15,8 +15,8 @@ import InstaLogo from '../assets/images/instagram-logo.png';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
-
 const HomeStackScreen = () => {
+  const isDarkMode = useColorScheme() === 'dark' ? true : false;
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -24,6 +24,7 @@ const HomeStackScreen = () => {
         component={HomeScreen}
         options={{
           title: 'Instagram',
+          headerStyle: { backgroundColor: isDarkMode ? '#000' : '#fff' },
           headerTitle: () => (
             <Image
               source={InstaLogo}
@@ -36,10 +37,14 @@ const HomeStackScreen = () => {
               <FAIcon
                 name="plus-square-o"
                 size={24}
-                color="#000"
+                color={isDarkMode ? '#fff' : '#000'}
                 style={styles.plusIcon}
               />
-              <MCIcon name="facebook-messenger" size={24} color="#000" />
+              <MCIcon
+                name="facebook-messenger"
+                size={24}
+                color={isDarkMode ? '#fff' : '#000'}
+              />
             </>
           ),
         }}
@@ -53,6 +58,7 @@ const HomeStackScreen = () => {
 };
 
 const Navigation = () => {
+  const isDarkMode = useColorScheme() === 'dark' ? true : false;
   return (
     <NavigationContainer>
       <Tab.Navigator
@@ -83,10 +89,12 @@ const Navigation = () => {
               return <Ionicon name={iconName} size={size} color={color} />;
             }
           },
-          tabBarActiveTintColor: '#000',
+          tabBarActiveTintColor: isDarkMode ? '#fff' : '#000',
           tabBarInactiveTintColor: 'gray',
+          tabBarItemStyle: { backgroundColor: isDarkMode ? '#000' : '#fff' },
           tabBarShowLabel: false,
           headerShown: false,
+          contentStyle: { backgroundColor: isDarkMode ? '#000' : '#fff' },
         })}>
         <Tab.Screen name="Home" component={HomeStackScreen} />
         <Tab.Screen name="Explore" component={DefaultScreen} />
