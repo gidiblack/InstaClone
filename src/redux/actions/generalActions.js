@@ -28,7 +28,7 @@ export const getFeedPosts = () => async dispatch => {
 };
 
 export const postLiked = (post, liked) => dispatch => {
-  if (liked) {
+  if (liked === true) {
     dispatch({
       type: POST_UNLIKED,
       payload: post,

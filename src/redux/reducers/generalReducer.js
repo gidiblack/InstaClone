@@ -32,14 +32,27 @@ export default function (state = initialState, action) {
         feedLoading: true,
       };
     case POST_LIKED:
+      let feed = [...state.feedPosts];
+      let likedPostObj = payload;
+      likedPostObj.liked = true;
+      likedPostObj.rating.count = likedPostObj.rating.count * 1 + 1;
       return {
         ...state,
-        likedPosts: [...state.likedPosts, payload],
+        feedPosts: feed.map(post =>
+          post.id === payload.id ? likedPostObj : post,
+        ),
+        likedPosts: [...state.likedPosts, likedPostObj],
       };
     case POST_UNLIKED:
+      let unlikedPostObj = payload;
+      unlikedPostObj.liked = false;
+      unlikedPostObj.rating.count = unlikedPostObj.rating.count * 1 - 1;
       return {
         ...state,
-        likedPosts: state.likedPosts.filter(post => post !== payload),
+        feedPosts: state.feedPosts.map(post =>
+          post.id === payload.id ? unlikedPostObj : post,
+        ),
+        likedPosts: state.likedPosts.filter(post => post.id !== payload.id),
       };
     default:
       return state;
